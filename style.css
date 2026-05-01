@@ -395,12 +395,42 @@ footer {
 
 /* ================ RESPONSIVE ================ */
 @media (max-width: 600px) {
-  nav { padding: 0.8rem 1rem; }
-  .nav-links { display: none; }
+  nav { padding: 0.8rem 1rem; flex-wrap: wrap; }
+  .nav-links { display: none; width: 100%; flex-direction: column; gap: 0; padding: 0.5rem 0; }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); color: var(--text); }
   .hero { padding: 2.5rem 1rem 2rem; }
   .products-section { padding: 1rem; }
   .cart-sidebar { width: 90vw; }
 }
+
+/* ================ HAMBURGER MENU ================ */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 8px;
+  cursor: pointer;
+  transition: border-color var(--transition);
+}
+.hamburger:hover { border-color: var(--accent); }
+.hamburger span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+@media (max-width: 600px) {
+  .hamburger { display: flex; }
+}
+
 
 /* ================ LANGUAGE SELECTOR ================ */
 .lang-select {

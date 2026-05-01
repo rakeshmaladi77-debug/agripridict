@@ -14,7 +14,7 @@
   <!-- NAV -->
   <nav class="glass-nav">
     <div class="nav-brand">🌾 <span data-t="brand">AgriPredict</span></div>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href="/" class="active" data-t="marketplace">🛒 Marketplace</a>
       <a href="dashboard.html" data-t="dashboard">📊 Dashboard</a>
       <a href="help.html" data-t="helpCenter">🆘 Help Center</a>
@@ -28,6 +28,9 @@
       </select>
       <button class="cart-btn" onclick="toggleCart()">
         🛒 <span id="cart-count">0</span>
+      </button>
+      <button class="hamburger" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
