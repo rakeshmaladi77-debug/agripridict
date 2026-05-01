@@ -16,7 +16,7 @@
   <!-- NAV -->
   <nav class="glass-nav">
     <div class="nav-brand">🌾 <span data-t="brand">AgriPredict</span></div>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href="/" data-t="marketplace">🛒 Marketplace</a>
       <a href="dashboard.html" class="active" data-t="dashboard">📊 Dashboard</a>
       <a href="help.html" data-t="helpCenter">🆘 Help Center</a>
@@ -29,6 +29,9 @@
       </select>
       <span id="farmer-greeting" data-t="greeting">👨‍🌾 Welcome, Farmer</span>
       <button onclick="logout()" class="btn-secondary" style="padding:.4rem .8rem;font-size:.8rem" data-t="logout">🚪 Logout</button>
+      <button class="hamburger" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 

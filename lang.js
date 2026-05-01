@@ -284,3 +284,25 @@ function setLanguage(lang) {
 }
 
 document.addEventListener('DOMContentLoaded', applyTranslations);
+
+// =============================================
+//  MOBILE HAMBURGER MENU (GLOBAL)
+// =============================================
+window.toggleMobileMenu = function() {
+  const navLinks = document.getElementById('nav-links');
+  const btn = document.getElementById('hamburger-btn');
+  if (!navLinks || !btn) return;
+  navLinks.classList.toggle('open');
+  // Animate hamburger spans to X when open
+  const spans = btn.querySelectorAll('span');
+  if (navLinks.classList.contains('open')) {
+    spans[0].style.transform = 'translateY(7px) rotate(45deg)';
+    spans[1].style.opacity = '0';
+    spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
+  } else {
+    spans[0].style.transform = '';
+    spans[1].style.opacity = '';
+    spans[2].style.transform = '';
+  }
+};
+

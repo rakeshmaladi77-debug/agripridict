@@ -402,24 +402,3 @@ document.addEventListener('DOMContentLoaded', () => {
   const langSelect = document.querySelector('.lang-select');
   if (langSelect) langSelect.value = currentLang;
 });
-
-// =============================================
-//  MOBILE HAMBURGER MENU
-// =============================================
-function toggleMobileMenu() {
-  const navLinks = document.getElementById('nav-links');
-  const btn = document.getElementById('hamburger-btn');
-  if (!navLinks) return;
-  navLinks.classList.toggle('open');
-  // Animate hamburger spans to X when open
-  const spans = btn.querySelectorAll('span');
-  if (navLinks.classList.contains('open')) {
-    spans[0].style.transform = 'translateY(7px) rotate(45deg)';
-    spans[1].style.opacity = '0';
-    spans[2].style.transform = 'translateY(-7px) rotate(-45deg)';
-  } else {
-    spans[0].style.transform = '';
-    spans[1].style.opacity = '';
-    spans[2].style.transform = '';
-  }
-}

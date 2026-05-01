@@ -15,7 +15,7 @@
   <!-- NAV -->
   <nav class="glass-nav">
     <div class="nav-brand">🌾 <span data-t="brand">AgriPredict</span></div>
-    <div class="nav-links">
+    <div class="nav-links" id="nav-links">
       <a href="/" data-t="marketplace">🛒 Marketplace</a>
       <a href="dashboard.html" data-t="dashboard">📊 Dashboard</a>
       <a href="help.html" class="active" data-t="helpCenter">🆘 Help Center</a>
@@ -26,6 +26,9 @@
         <option value="hi">🇮🇳 हिन्दी</option>
         <option value="te">🇮🇳 తెలుగు</option>
       </select>
+      <button class="hamburger" id="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
 

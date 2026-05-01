@@ -396,7 +396,7 @@ footer {
 /* ================ RESPONSIVE ================ */
 @media (max-width: 600px) {
   nav { padding: 0.8rem 1rem; flex-wrap: wrap; }
-  .nav-links { display: none; width: 100%; flex-direction: column; gap: 0; padding: 0.5rem 0; }
+  .nav-links { display: none; width: 100%; flex-direction: column; gap: 0; padding: 0.5rem 0; order: 3; }
   .nav-links.open { display: flex; }
   .nav-links a { padding: 0.7rem 1rem; border-bottom: 1px solid var(--border); color: var(--text); }
   .hero { padding: 2.5rem 1rem 2rem; }
