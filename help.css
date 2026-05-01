@@ -1,0 +1,454 @@
+/* help.css – Farmer Help Center Styles */
+
+.help-hero {
+  background: linear-gradient(135deg, hsla(142, 71%, 45%, 0.1), hsla(220, 20%, 10%, 0.5)), 
+              url('https://images.unsplash.com/photo-1500382017468-9049fee74a62?auto=format&fit=crop&w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  padding: 6rem 2rem 4rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.help-hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.help-hero-content p {
+  color: var(--muted);
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto 2.5rem;
+}
+
+.help-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.help-tab {
+  background: var(--bg-card);
+  backdrop-filter: blur(var(--blur));
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.7rem 1.2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.help-tab:hover, .help-tab.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--accent-glow);
+}
+
+.help-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+.help-section {
+  display: none;
+  animation: fadeUp 0.5s ease both;
+}
+
+.help-section.active {
+  display: block;
+}
+
+.sec-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.sec-sub {
+  color: var(--muted);
+  margin-bottom: 3rem;
+}
+
+/* Schemes */
+.scheme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.scheme-card {
+  padding: 1.5rem;
+  display: flex;
+  gap: 1.2rem;
+  transition: transform var(--transition);
+}
+
+.scheme-card:hover { transform: translateY(-5px); }
+
+.scheme-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.scheme-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.scheme-body h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+}
+
+.scheme-benefit { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.4rem; }
+.scheme-who { font-size: 0.85rem; color: var(--muted); margin-bottom: 1rem; }
+
+summary {
+  font-size: 0.85rem;
+  color: var(--accent);
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.scheme-how {
+  font-size: 0.85rem;
+  color: var(--muted);
+  padding: 0.5rem;
+  background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+}
+
+/* Crop Doctor */
+.disease-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2rem;
+}
+
+.symptom-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.chip {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 0.4rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.chip:hover { border-color: var(--muted); }
+.chip.selected {
+  background: var(--accent-glow);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.disease-result {
+  padding: 2rem;
+  min-height: 300px;
+}
+
+.diag-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sev-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.diag-treatment, .diag-prevention {
+  margin-top: 1.5rem;
+}
+
+.diag-treatment h4, .diag-prevention h4 {
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.diag-note {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.disease-ref-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.dis-ref-card { padding: 1rem; }
+.dis-ref-top { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
+.dis-ref-top span { font-size: 0.8rem; color: var(--muted); }
+.dis-ref-top strong { color: var(--warn); }
+.dis-sign { font-size: 0.85rem; margin-bottom: 0.3rem; }
+.dis-treat { font-size: 0.85rem; color: var(--accent); font-weight: 600; }
+
+/* Calendar */
+.calendar-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+}
+
+.calendar-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin-bottom: 1rem;
+}
+
+.cal-header {
+  display: grid;
+  grid-template-columns: 140px repeat(12, 1fr);
+  background: rgba(255,255,255,0.05);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.cal-row {
+  display: grid;
+  grid-template-columns: 140px repeat(12, 1fr);
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+}
+
+.cal-crop {
+  padding-left: 1rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  position: sticky;
+  left: 0;
+  background: var(--bg-card);
+  z-index: 2;
+  border-right: 1px solid var(--border);
+}
+
+.cal-cell {
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid var(--border);
+}
+
+.cal-cell.sow { background: hsla(142, 71%, 45%, 0.15); color: var(--accent); }
+.cal-cell.grow { background: hsla(200, 80%, 60%, 0.05); }
+.cal-cell.harvest { background: hsla(38, 92%, 60%, 0.2); color: var(--warn); }
+
+.cal-legend {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem;
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+}
+
+.cal-legend span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cal-legend i {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-style: normal;
+}
+.cal-legend i.sow { background: hsla(142, 71%, 45%, 0.1); border: 1px solid var(--accent); }
+.cal-legend i.grow { background: hsla(200, 80%, 60%, 0.05); border: 1px solid #3b82f6; }
+.cal-legend i.harvest { background: hsla(38, 92%, 60%, 0.15); border: 1px solid var(--warn); }
+
+/* Calculators */
+.calc-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+}
+
+.calc-tab {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.calc-tab.active { background: var(--bg-card); color: var(--text); border-color: var(--muted); }
+
+.calc-panel { padding: 2rem; }
+.calc-panel h3 { margin-bottom: 1.5rem; font-size: 1.2rem; }
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.calc-result {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: rgba(255,255,255,0.03);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  animation: fadeUp 0.3s ease;
+}
+
+.fert-grid, .profit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.fert-item, .profit-item {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.fert-item span, .profit-item span { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.3rem; }
+.fert-item strong, .profit-item strong { font-size: 1.3rem; color: var(--text); }
+.fert-item small { font-size: 0.75rem; color: var(--muted); margin-top: 0.3rem; }
+
+.calc-note { font-size: 0.8rem; color: var(--muted); margin-top: 1rem; border-left: 2px solid var(--accent); padding-left: 0.8rem; }
+
+/* Helplines */
+.helpline-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.helpline-card {
+  padding: 1.2rem;
+  display: flex;
+  gap: 1rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform var(--transition);
+}
+
+.helpline-card:hover { transform: translateY(-3px); }
+
+.hl-icon { font-size: 2rem; flex-shrink: 0; }
+.hl-body h3 { font-size: 1rem; margin-bottom: 0.2rem; }
+.hl-number { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.4rem; }
+.hl-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.4; }
+.hl-call {
+  align-self: flex-start;
+  padding: 0.2rem 0.6rem;
+  border-radius: 50px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.emergency-banner {
+  margin-top: 3rem;
+  padding: 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  border: 2px solid hsla(0, 75%, 60%, 0.2);
+}
+
+.emergency-banner h3 { color: #ef4444; font-size: 1.5rem; margin-bottom: 0.5rem; }
+
+/* Tips */
+.tips-filter {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.tip-filter-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tip-filter-btn.active { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.tip-card {
+  padding: 1.5rem;
+  display: flex;
+  gap: 1.2rem;
+}
+
+.tip-icon { font-size: 2rem; flex-shrink: 0; }
+.tip-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+.tip-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; }
+
+@media (max-width: 768px) {
+  .help-hero h1 { font-size: 2rem; }
+  .disease-layout { grid-template-columns: 1fr; }
+  .emergency-banner { flex-direction: column; text-align: center; }
+  .cal-header, .cal-row { grid-template-columns: 100px repeat(12, 1fr); }
+  .cal-crop { padding-left: 0.5rem; font-size: 0.8rem; }
+}

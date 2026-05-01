@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Authenticating...</title>
+  <style>
+    body { background: #0f172a; color: white; display: flex; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif; }
+    .loader { border: 4px solid rgba(255,255,255,0.1); border-left-color: #10b981; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div style="text-align:center">
+    <div class="loader" style="margin: 0 auto 1rem"></div>
+    <p>Authenticating with Google...</p>
+  </div>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    if (token) {
+      localStorage.setItem('token', token);
+      window.location.href = '/dashboard.html';
+    } else {
+      window.location.href = '/login.html?error=auth_failed';
+    }
+  </script>
+</body>
+</html>

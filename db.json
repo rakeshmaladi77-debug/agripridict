@@ -1,0 +1,171 @@
+{
+  "products": [
+    {
+      "_id": "p1",
+      "name": "Basmati Rice",
+      "category": "grains",
+      "price": 75,
+      "unit": "kg",
+      "farmer": "Rakesh Maladi",
+      "farmerPhone": "9391357351",
+      "description": "Freshly harvested Basmati Rice. High quality.",
+      "farmerId": "u1",
+      "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=600&q=80",
+      "location": "Punjab"
+    },
+    {
+      "_id": "p2",
+      "name": "Sharbati Wheat",
+      "category": "grains",
+      "price": 45,
+      "unit": "kg",
+      "farmer": "Rakesh Maladi",
+      "farmerPhone": "9391357351",
+      "description": "Freshly harvested Sharbati Wheat. High quality.",
+      "farmerId": "u1",
+      "image": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=600&q=80",
+      "location": "Punjab"
+    },
+    {
+      "_id": "p3",
+      "name": "Organic Tomatoes",
+      "category": "vegetables",
+      "price": 30,
+      "unit": "kg",
+      "farmer": "Rakesh Maladi",
+      "farmerPhone": "9391357351",
+      "description": "Freshly harvested Organic Tomatoes. High quality.",
+      "farmerId": "u1",
+      "image": "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80",
+      "location": "Punjab"
+    },
+    {
+      "_id": "p4",
+      "name": "Basmati Rice",
+      "category": "grains",
+      "price": 75,
+      "unit": "kg",
+      "farmer": "Rakesh Maladi",
+      "farmerPhone": "9391357351",
+      "description": "Freshly harvested Basmati Rice. High quality.",
+      "farmerId": "u1",
+      "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=600&q=80",
+      "location": "Punjab"
+    },
+    {
+      "_id": "p5",
+      "name": "Sharbati Wheat",
+      "category": "grains",
+      "price": 45,
+      "unit": "kg",
+      "farmer": "Rakesh Maladi",
+      "farmerPhone": "9391357351",
+      "description": "Freshly harvested Sharbati Wheat. High quality.",
+      "farmerId": "u1",
+      "image": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=600&q=80",
+      "location": "Punjab"
+    },
+    {
+      "_id": "p6",
+      "name": "Organic Tomatoes",
+      "category": "vegetables",
+      "price": 30,
+      "unit": "kg",
+      "farmer": "Rakesh Maladi",
+      "farmerPhone": "9391357351",
+      "description": "Freshly harvested Organic Tomatoes. High quality.",
+      "farmerId": "u1",
+      "image": "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80",
+      "location": "Punjab"
+    },
+    {
+      "_id": "p7",
+      "name": "Basmati Rice",
+      "category": "grains",
+      "price": 75,
+      "unit": "kg",
+      "farmer": "Rakesh Maladi",
+      "farmerPhone": "9391357351",
+      "description": "Freshly harvested Basmati Rice. High quality.",
+      "farmerId": "u1",
+      "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=600&q=80",
+      "location": "Punjab"
+    },
+    {
+      "_id": "p8",
+      "name": "Sharbati Wheat",
+      "category": "grains",
+      "price": 45,
+      "unit": "kg",
+      "farmer": "Rakesh Maladi",
+      "farmerPhone": "9391357351",
+      "description": "Freshly harvested Sharbati Wheat. High quality.",
+      "farmerId": "u1",
+      "image": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=600&q=80",
+      "location": "Punjab"
+    },
+    {
+      "_id": "p9",
+      "name": "Organic Tomatoes",
+      "category": "vegetables",
+      "price": 30,
+      "unit": "kg",
+      "farmer": "Rakesh Maladi",
+      "farmerPhone": "9391357351",
+      "description": "Freshly harvested Organic Tomatoes. High quality.",
+      "farmerId": "u1",
+      "image": "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80",
+      "location": "Punjab"
+    },
+    {
+      "_id": "p10",
+      "name": "Basmati Rice",
+      "category": "grains",
+      "price": 75,
+      "unit": "kg",
+      "farmer": "Rakesh Maladi",
+      "farmerPhone": "9391357351",
+      "description": "Freshly harvested Basmati Rice. High quality.",
+      "farmerId": "u1",
+      "image": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=600&q=80",
+      "location": "Punjab"
+    },
+    {
+      "_id": "p11",
+      "name": "Sharbati Wheat",
+      "category": "grains",
+      "price": 45,
+      "unit": "kg",
+      "farmer": "Rakesh Maladi",
+      "farmerPhone": "9391357351",
+      "description": "Freshly harvested Sharbati Wheat. High quality.",
+      "farmerId": "u1",
+      "image": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=600&q=80",
+      "location": "Punjab"
+    },
+    {
+      "_id": "p12",
+      "name": "Organic Tomatoes",
+      "category": "vegetables",
+      "price": 30,
+      "unit": "kg",
+      "farmer": "Rakesh Maladi",
+      "farmerPhone": "9391357351",
+      "description": "Freshly harvested Organic Tomatoes. High quality.",
+      "farmerId": "u1",
+      "image": "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=600&q=80",
+      "location": "Punjab"
+    }
+  ],
+  "users": [
+    {
+      "id": "u1",
+      "name": "Rakesh Maladi",
+      "phone": "9391357351",
+      "password": "$2b$10$gQD7Z2SwuyfeFTWzP3HkVeJZTazDZqcbenJM5wFsykaUuiNrzCK5G"
+    }
+  ],
+  "orders": [],
+  "evolution": [],
+  "learningLogs": []
+}

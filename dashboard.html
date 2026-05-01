@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgriPredict – Farmer Dashboard</title>
+  <meta name="description" content="Farmer dashboard to manage products, view orders, and get AI price predictions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="glass-nav">
+    <div class="nav-brand">🌾 <span data-t="brand">AgriPredict</span></div>
+    <div class="nav-links">
+      <a href="/" data-t="marketplace">🛒 Marketplace</a>
+      <a href="dashboard.html" class="active" data-t="dashboard">📊 Dashboard</a>
+      <a href="help.html" data-t="helpCenter">🆘 Help Center</a>
+    </div>
+    <div class="nav-farmer-info" style="display:flex;align-items:center;gap:1rem">
+      <select onchange="setLanguage(this.value)" class="lang-select" title="Language / భాష">
+        <option value="en">🌐 English</option>
+        <option value="hi">🇮🇳 हिन्दी</option>
+        <option value="te">🇮🇳 తెలుగు</option>
+      </select>
+      <span id="farmer-greeting" data-t="greeting">👨‍🌾 Welcome, Farmer</span>
+      <button onclick="logout()" class="btn-secondary" style="padding:.4rem .8rem;font-size:.8rem" data-t="logout">🚪 Logout</button>
+    </div>
+  </nav>
+
+  <!-- DASHBOARD LAYOUT -->
+  <div class="dashboard-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="dash-sidebar glass">
+      <button class="dash-nav-btn active" data-tab="overview" onclick="switchTab(this, 'overview')" data-t="overview">📊 Overview</button>
+      <button class="dash-nav-btn" data-tab="products" onclick="switchTab(this, 'products')" data-t="myProducts">🌾 My Products</button>
+      <button class="dash-nav-btn" data-tab="add-product" onclick="switchTab(this, 'add-product')" data-t="addProduct">➕ Add Product</button>
+      <button class="dash-nav-btn" data-tab="orders" onclick="switchTab(this, 'orders')" data-t="orders">📦 Orders</button>
+      <button class="dash-nav-btn" data-tab="predict" onclick="switchTab(this, 'predict')" data-t="aiPrediction">🤖 AI Prediction</button>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="dash-main">
+
+      <!-- OVERVIEW TAB -->
+      <section id="tab-overview" class="tab-section active">
+        <h1 data-t="dashTitle">Dashboard Overview</h1>
+        <div class="stat-row">
+          <div class="dash-stat glass">
+            <span class="stat-icon">🌾</span>
+            <div>
+              <p class="stat-num" id="stat-products">8</p>
+              <p class="stat-label" data-t="activeProducts">Active Products</p>
+            </div>
+          </div>
+          <div class="dash-stat glass">
+            <span class="stat-icon">📦</span>
+            <div>
+              <p class="stat-num" id="stat-orders">0</p>
+              <p class="stat-label" data-t="ordersReceived">Orders Received</p>
+            </div>
+          </div>
+          <div class="dash-stat glass">
+            <span class="stat-icon">💰</span>
+            <div>
+              <p class="stat-num" id="stat-revenue">₹0</p>
+              <p class="stat-label" data-t="estRevenue">Est. Revenue</p>
+            </div>
+          </div>
+          <!-- Weather Card -->
+          <div class="dash-stat glass weather-stat" id="weather-card">
+            <span class="stat-icon" id="weather-icon">☀️</span>
+            <div style="flex:1">
+              <p class="stat-num" id="weather-temp">32°C</p>
+              <p class="stat-label" id="weather-location">Punjab, IN</p>
+            </div>
+            <div class="weather-meta">
+              <span id="weather-condition">Sunny</span>
+              <span id="weather-advice" data-t="harvestTime">Harvest time!</span>
+            </div>
+          </div>
+        </div>
+
+        <h2 style="margin:2rem 0 1rem" data-t="recentOrders">Recent Orders</h2>
+        <div id="recent-orders-list" class="orders-list">
+          <p class="empty-msg" data-t="noOrders">No orders yet. Share your products to get started! 🌾</p>
+        </div>
+
+        <h2 style="margin:2rem 0 1rem" data-t="mandiInsights">📊 Mandi Market Insights</h2>
+        <div class="overview-grid" style="grid-template-columns: 1fr 1.5fr; gap: 2rem;">
+          <div class="glass mandi-dashboard-card">
+            <div id="mandi-insights-list" class="mandi-grid" style="grid-template-columns: 1fr; gap: 1rem;">
+              <p class="empty-msg">Loading live market data...</p>
+            </div>
+          </div>
+          <div class="glass mandi-dashboard-card">
+            <h3 style="margin-bottom: 1.5rem" data-t="priceTrends">📉 Price Trends (Last 6 Months)</h3>
+            <canvas id="priceTrendsChart" style="max-height: 300px;"></canvas>
+          </div>
+        </div>
+
+        <div class="decision-hub-header" style="margin-top:2.5rem">
+          <div>
+            <h2 data-t="aiPerformance">📈 AI Performance Monitoring</h2>
+            <div style="display:flex; align-items:center; gap:0.8rem; margin-top:0.2rem">
+               <p style="font-size:0.85rem; color:var(--muted)">Tracking predictive accuracy vs. real market outcomes</p>
+               <span class="live-pulse" style="background:rgba(16, 185, 129, 0.1); color:#10b981; animation:none; font-size:0.6rem">SELF-LEARNING ACTIVE</span>
+            </div>
+          </div>
+          <button class="btn-secondary" onclick="simulateOutcomes()" style="font-size:0.75rem">🧪 Simulate Outcomes</button>
+        </div>
+
+        <div class="overview-grid" style="grid-template-columns: 1fr 2fr; margin-bottom: 2rem">
+          <div class="glass" style="text-align:center; padding:2rem; display:flex; flex-direction:column; justify-content:center">
+            <h1 id="global-accuracy" style="font-size:3.5rem; color:var(--accent); margin:0">0%</h1>
+            <p style="color:var(--muted); text-transform:uppercase; letter-spacing:1px; font-weight:700">Current Accuracy</p>
+            <div id="accuracy-improvement" style="font-size:0.9rem; font-weight:700; color:#10b981; margin-top:0.5rem">+0% Gain</div>
+            <div id="accuracy-count" style="font-size:0.75rem; color:var(--muted); margin-top:0.5rem">0 decisions tracked</div>
+          </div>
+          <div class="glass" style="padding:1.5rem">
+            <h3 style="font-size:0.9rem; margin-bottom:1rem">🤖 Learning Log (Live Weight Tuning)</h3>
+            <div id="learning-log-list" style="display:flex; flex-direction:column; gap:0.6rem">
+              <p class="empty-msg">Waiting for enough data to begin optimization...</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="glass" style="padding:1.5rem; margin-bottom:2.2rem">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem">
+              <h3 style="font-size:0.9rem">📈 Model Evolution Timeline</h3>
+              <div style="display:flex; gap:0.5rem">
+                <span class="live-pulse" id="drift-status" style="background:rgba(245,158,11,0.1); color:#f59e0b; animation:none; font-size:0.6rem">STABLE PATTERN</span>
+                <button class="btn-secondary" onclick="generateIntelligenceReport()" style="font-size:0.75rem; padding:0.3rem 0.6rem">📥 Export Report</button>
+              </div>
+            </div>
+            <div style="height:250px">
+              <canvas id="evolutionChart"></canvas>
+            </div>
+        </div>
+
+        <div class="glass" style="padding:1.5rem; margin-bottom:2rem">
+            <h3 style="font-size:0.9rem; margin-bottom:1rem">Performance by Commodity</h3>
+            <div id="crop-performance-list" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap:1rem">
+              <!-- JS Populated -->
+            </div>
+        </div>
+
+        <div class="decision-hub-header">
+          <h2 data-t="decisionHub">🎯 Sell Decision Hub</h2>
+          <span class="live-pulse">LIVE ANALYSIS</span>
+        </div>
+        <div id="decision-hub-container" class="decision-hub-grid">
+          <!-- Cards populated by JS -->
+          <p class="empty-msg">Running multi-factor analysis (Market + Weather + AI)...</p>
+        </div>
+
+        <h2 style="margin:2rem 0 1rem" data-t="actionableIntel">💡 Regional Insights</h2>
+        <div id="smart-recommendations" class="smart-rec-container">
+          <p class="empty-msg">Analyzing regional data...</p>
+        </div>
+
+        <div class="glass" style="margin-top:2rem; padding:1.5rem">
+          <h3 style="font-size:1rem; margin-bottom:1rem">📜 Recommendation History</h3>
+          <div id="recommendation-history-list">
+            <p class="empty-msg">No history yet.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- MY PRODUCTS TAB -->
+      <section id="tab-products" class="tab-section">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
+          <h1 data-t="myProducts">My Products</h1>
+          <button class="btn-primary" onclick="switchTab(document.querySelector('[data-tab=add-product]'), 'add-product')" data-t="addProduct">➕ Add New</button>
+        </div>
+        <div id="my-products-grid" class="grid"></div>
+      </section>
+
+      <!-- ADD PRODUCT TAB -->
+      <section id="tab-add-product" class="tab-section">
+        <h1 data-t="addProductTitle">Add New Product</h1>
+        <div class="glass form-card">
+          <form id="add-product-form">
+            <div class="form-grid">
+              <div class="field">
+                <label data-t="cropName">Crop / Product Name</label>
+                <input type="text" id="p-name" data-t-placeholder="cropName" placeholder="e.g. Basmati Rice" required />
+              </div>
+              <div class="field">
+                <label data-t="category">Category</label>
+                <select id="p-category">
+                  <option value="grains">Grains</option>
+                  <option value="vegetables">Vegetables</option>
+                  <option value="pulses">Pulses</option>
+                  <option value="fruits">Fruits</option>
+                  <option value="spices">Spices</option>
+                </select>
+              </div>
+              <div class="field">
+                <label data-t="priceUnit">Price per Unit (₹)</label>
+                <div style="display:flex;gap:.5rem;align-items:center">
+                  <input type="number" id="p-price" placeholder="e.g. 75" min="1" required style="flex:1" />
+                  <div id="mandi-rate-hint" class="glass" style="padding:.5rem .8rem;font-size:.8rem;border-radius:10px;display:none;white-space:nowrap;border:1px solid var(--accent)">
+                    <span style="color:var(--accent)">💰 Market:</span> <b id="mandi-rate-val">₹0</b>
+                  </div>
+                </div>
+              </div>
+              <div class="field">
+                <label data-t="unit">Unit</label>
+                <select id="p-unit">
+                  <option value="kg">kg</option>
+                  <option value="quintal">Quintal</option>
+                  <option value="dozen">Dozen</option>
+                  <option value="piece">Piece</option>
+                </select>
+              </div>
+              <div class="field" style="grid-column:span 2">
+                <label data-t="description">Description</label>
+                <input type="text" id="p-desc" placeholder="Brief description of your crop..." required />
+              </div>
+              <div class="field">
+                <label data-t="location">Your Location</label>
+                <input type="text" id="p-location" placeholder="Village, District, State" required />
+              </div>
+              <div class="field">
+                <label data-t="contactPhone">Contact Phone</label>
+                <input type="tel" id="p-phone" placeholder="+91 98765 43210" required />
+              </div>
+              <div class="field" style="grid-column:span 2">
+                <label data-t="imageUrl">Product Image URL <small style="color:var(--muted)">(paste an image link, or leave blank)</small></label>
+                <input type="url" id="p-image" placeholder="https://..." />
+              </div>
+
+              <!-- AI Prediction Hint -->
+              <div class="field" style="grid-column:span 2">
+                <div class="predict-hint glass" id="price-hint" style="display:none">
+                  <span>🤖</span>
+                  <div>
+                    <strong>AI Suggestion:</strong>
+                    <span id="hint-text">Loading...</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%;margin-top:1rem;justify-content:center" data-t="listProduct">✅ List Product</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- ORDERS TAB -->
+      <section id="tab-orders" class="tab-section">
+        <h1 data-t="orders">Orders Received</h1>
+        <div id="orders-list-full" class="orders-list">
+          <p class="empty-msg" data-t="noOrders">No orders yet. Orders will appear here when customers contact you.</p>
+        </div>
+      </section>
+
+      <!-- AI PREDICTION TAB -->
+      <section id="tab-predict" class="tab-section">
+        <h1 data-t="aiTitle">🤖 AI Price Prediction</h1>
+        <p style="color:var(--muted);margin-bottom:1.5rem" data-t="aiSubtitle">Enter your crop details to get AI-powered price forecasts based on seasonal trends.</p>
+
+        <div class="predict-layout">
+          <div class="glass form-card">
+            <h3 style="margin-bottom:1rem" data-t="aiTitle">Get Prediction</h3>
+            <div class="field">
+              <label data-t="cropType">Crop Type</label>
+              <select id="pred-crop">
+                <option value="rice">Rice / चावल / వరి</option>
+                <option value="wheat">Wheat / गेहूं / గోధుమ</option>
+                <option value="corn">Corn / मक्का / మక్కా</option>
+                <option value="tomato">Tomato / टमाटर / టమోటా</option>
+                <option value="onion">Onion / प्याज / ఉల్లిపాయ</option>
+                <option value="soybean">Soybean / सोयाबीन / సోయాబీన్</option>
+                <option value="chana">Chana Dal / चना दाल / శనగపప్పు</option>
+                <option value="masoor">Masoor Dal / मसूर दाल / మసూర్ పప్పు</option>
+              </select>
+            </div>
+            <div class="field">
+              <label data-t="monthLabel">Month (1–12)</label>
+              <input type="number" id="pred-month" min="1" max="12" value="7" />
+            </div>
+            <div class="field">
+              <label data-t="stateLabel">Your State</label>
+              <select id="pred-state">
+                <option value="punjab">Punjab / पंजाब / పంజాబ్</option>
+                <option value="haryana">Haryana / हरियाणा / హర్యానా</option>
+                <option value="up">Uttar Pradesh / Uttar Pradesh / ఉత్తర ప్రదేశ్</option>
+                <option value="mp">Madhya Pradesh / मध्य प्रदेश / మధ్య ప్రదేశ్</option>
+                <option value="maharashtra">Maharashtra / महाराष्ट्र / మహారాష్ట్ర</option>
+                <option value="rajasthan">Rajasthan / राजस्थान / రాజస్థాన్</option>
+                <option value="ap">Andhra Pradesh / ఆంధ్రప్రదేశ్</option>
+                <option value="ts">Telangana / తెలంగాణ</option>
+              </select>
+            </div>
+            <button class="btn-primary" style="width:100%;justify-content:center;margin-top:.5rem" onclick="getPrediction()" data-t="predictBtn">🔮 Predict Price</button>
+          </div>
+
+          <!-- Result Card -->
+          <div id="prediction-result" class="glass form-card" style="display:none">
+            <h3 data-t="predictionResult">Prediction Result</h3>
+            <div class="predict-result-body">
+              <div class="predict-crop-name" id="res-crop-name"></div>
+              <div class="predict-price-big" id="res-price"></div>
+              <div class="predict-meta">
+                <span id="res-trend"></span>
+                <span id="res-confidence"></span>
+              </div>
+              <div id="res-advice" class="predict-advice"></div>
+
+              <!-- Real Chart -->
+              <div style="height: 200px; margin-top: 1rem;">
+                <canvas id="predictionChart"></canvas>
+              </div>
+              <p style="font-size:.75rem;color:var(--muted);margin-top:.5rem" data-t="forecast">📅 6-Month AI Forecast</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+  
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content" style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+      <p data-t="footer">© 2024 AgriPredict. Empowering farmers across India.</p>
+      <div class="social-links" style="display: flex; gap: 1.5rem; justify-content: center; margin-top: 10px;">
+        <a href="https://www.facebook.com/AgriPredict" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook" style="color: white; font-size: 1.5rem; text-decoration: none; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35C.597 0 0 .597 0 1.325v21.351C0 23.403.597 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.597 1.323-1.324V1.325C24 .597 23.403 0 22.675 0z"/></svg>
+        </a>
+        <a href="https://x.com/AgriPredict" target="_blank" rel="noopener" class="social-icon" aria-label="Twitter" style="color: white; font-size: 1.5rem; text-decoration: none; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/agripredict" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram" style="color: white; font-size: 1.5rem; text-decoration: none; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/company/agripredict" target="_blank" rel="noopener" class="social-icon" aria-label="LinkedIn" style="color: white; font-size: 1.5rem; text-decoration: none; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
+          <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SUCCESS TOAST -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="lang.js"></script>
+  <script src="voice.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
