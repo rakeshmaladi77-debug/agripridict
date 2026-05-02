@@ -39,7 +39,7 @@ function applyTranslations() {
 
 const API = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
   ? 'http://localhost:3000' 
-  : 'https://agripredict-backend.onrender.com'; // REPLACE WITH YOUR RENDER URL
+  : 'https://agripridict.onrender.com'; // REPLACE WITH YOUR RENDER URL
 const WHATSAPP_NUMBER = '919391357351'; // Rakesh's WhatsApp
 
 // ─── Authentication Check ────────────────────
