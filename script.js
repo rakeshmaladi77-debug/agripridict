@@ -1,43 +1,4 @@
 /* script.js – AgriPredict Frontend Logic */
-// ─── Multilingual Support ───────────────────
-const translations = {
-  en: {
-    brand: "AgriPredict",
-    heroTitle: "Empowering Farmers with AI Intelligence",
-    heroSub: "Direct marketplace, AI price predictions, and weather insights to help you grow more.",
-    mandiTitle: "Live Mandi Prices",
-    searchPlaceholder: "Search crops (e.g. Rice, Wheat)...",
-    dashboard: "📊 Dashboard",
-    marketplace: "🛒 Marketplace"
-  },
-  hi: {
-    brand: "एग्रीप्रेडिक्ट",
-    heroTitle: "AI इंटेलिजेंस के साथ किसानों को सशक्त बनाना",
-    heroSub: "सीधा बाजार, AI मूल्य भविष्यवाणी, और मौसम की जानकारी आपको अधिक विकसित करने में मदद करने के लिए।",
-    mandiTitle: "लाइव मंडी भाव",
-    searchPlaceholder: "फसलें खोजें (जैसे चावल, गेहूं)...",
-    dashboard: "📊 डैशबोर्ड",
-    marketplace: "🛒 मार्केटप्लेस"
-  }
-};
-
-let currentLang = localStorage.getItem('lang') || 'en';
-
-function setLanguage(lang) {
-  currentLang = lang;
-  localStorage.setItem('lang', lang);
-  applyTranslations();
-}
-
-function applyTranslations() {
-  const t = translations[currentLang];
-  document.querySelectorAll('[data-t]').forEach(el => {
-    const key = el.getAttribute('data-t');
-    if (t[key]) el.textContent = t[key];
-  });
-  const searchInput = document.getElementById('search-input');
-  if (searchInput) searchInput.placeholder = t.searchPlaceholder;
-}
 
 const API = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
   ? 'http://localhost:3000' 

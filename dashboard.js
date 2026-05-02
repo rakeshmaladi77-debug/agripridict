@@ -1,41 +1,7 @@
 // dashboard.js – Farmer Dashboard Logic with Authentication
 // ─── Multilingual Support ───────────────────
-const translations = {
-  en: {
-    brand: "AgriPredict",
-    overview: "📊 Overview",
-    myProducts: "🌾 My Products",
-    addProduct: "➕ Add Product",
-    orders: "📦 Orders",
-    aiPrediction: "🤖 AI Prediction",
-    greeting: "👨‍🌾 Welcome, Farmer"
-  },
-  hi: {
-    brand: "एग्रीप्रेडिक्ट",
-    overview: "📊 सिंहावलोकन",
-    myProducts: "🌾 मेरी फसलें",
-    addProduct: "➕ फसल जोड़ें",
-    orders: "📦 आदेश",
-    aiPrediction: "🤖 AI भविष्यवाणी",
-    greeting: "👨‍🌾 स्वागत है, किसान"
-  }
-};
 
-let currentLang = localStorage.getItem('lang') || 'en';
 
-function setLanguage(lang) {
-  currentLang = lang;
-  localStorage.setItem('lang', lang);
-  location.reload(); // Reload dashboard to refresh all tabs easily
-}
-
-function applyTranslations() {
-  const t = translations[currentLang];
-  document.querySelectorAll('[data-t]').forEach(el => {
-    const key = el.getAttribute('data-t');
-    if (t[key]) el.textContent = t[key];
-  });
-}
 
 const API = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
   ? 'http://localhost:3000' 
